@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnergyBuddy Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* ✨ Modern oceanic gradient background */
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      background-attachment: fixed;
+      background-size: 400% 400%;
+      animation: bgShift 10s ease-in-out infinite alternate;
+      overflow: hidden;
+    }
+
+    /* Smooth animated gradient motion */
+    @keyframes bgShift {
+      0% { background-position: left top; }
+      100% { background-position: right bottom; }
+    }
+
+    .dashboard-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 400px;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      color: #02475e;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #045a72;
+      font-weight: 500;
+    }
+
+    button {
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 188, 212, 0.4);
+    }
+
+    /* Subtle fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Optional floating bubble glow effect */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: float 10s infinite ease-in-out;
+      filter: blur(2px);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.8; }
+      50% { transform: translateY(-30px); opacity: 1; }
+      100% { transform: translateY(0); opacity: 0.8; }
+    }
+
+    .bubble:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-duration: 12s; }
+    .bubble:nth-child(2) { width: 100px; height: 100px; top: 60%; right: 15%; animation-duration: 15s; }
+    .bubble:nth-child(3) { width: 60px; height: 60px; bottom: 10%; left: 20%; animation-duration: 18s; }
+  </style>
+</head>
+<body>
+  <!-- Decorative floating bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="dashboard-container">
+    <h2>Welcome to EnergyBuddy!</h2>
+    <p>Your personal energy and wellness companion 🌿</p>
+
+    <button onclick="window.location.href='energyAnalyzer.html'">
+      Start Energy Analyzer
+    </button>
+    <br />
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      alert("You have been logged out!");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

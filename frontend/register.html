@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EnergyBuddy - Register</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      /* Alt green-blue tone: background: linear-gradient(135deg, #b2f7ef, #a6e3e9); */
+      overflow: hidden;
+    }
+
+    .register-box {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 50px 60px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #00796b;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 280px;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #aaa;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      font-size: 1rem;
+      text-align: center;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #00c853;
+      box-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
+      transform: scale(1.02);
+    }
+
+    button {
+      width: 300px;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(90deg, #00c853, #64dd17);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #00e676, #76ff03);
+      box-shadow: 0 0 15px rgba(0, 255, 128, 0.5);
+    }
+
+    pre {
+      color: #444;
+      font-size: 0.9rem;
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      border-radius: 10px;
+      overflow-x: auto;
+      text-align: left;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Create Account 🌿</h2>
+    <form id="reg">
+      <input id="email" type="email" placeholder="Enter your email" required><br>
+      <input id="password" type="password" placeholder="Create a password" required><br>
+      <button type="submit">Register</button>
+    </form>
+    <pre id="out"></pre>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000';
+    document.getElementById('reg').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      try {
+        const res = await fetch(API + '/api/register', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ email, password })
+        });
+        const json = await res.json();
+        document.getElementById('out').innerText = JSON.stringify(json, null, 2);
+        if (res.ok) {
+          alert('Registered successfully! Please login.');
+          location.href = 'login.html';
+        }
+      } catch (err) {
+        document.getElementById('out').innerText = 'Fetch error: ' + err;
+      }
+    });
+  </script>
+</body>
+</html>

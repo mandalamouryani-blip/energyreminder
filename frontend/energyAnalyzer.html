@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Energy Analyzer — Answer Questions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    :root {
+      --accent: #00c6ff;
+      --accent2: #0072ff;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc); /* soft purple-blue gradient */
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating bubble effects */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: float 10s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    body::before {
+      width: 250px;
+      height: 250px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    body::after {
+      width: 400px;
+      height: 400px;
+      bottom: 5%;
+      right: 5%;
+      animation-delay: 5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-25px) scale(1.05); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 760px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: 0 10px 35px var(--shadow);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1s ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: #004a9f;
+      font-size: 2rem;
+    }
+
+    p.lead {
+      color: #333;
+      margin: 0 0 20px;
+      font-weight: 500;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #222;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 22px;
+    }
+
+    button {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 114, 255, 0.5);
+    }
+
+    button.secondary {
+      background: #fff;
+      color: var(--accent2);
+      border: 2px solid var(--accent2);
+    }
+
+    small.note {
+      display: block;
+      color: #444;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .card { width: 90%; padding: 20px; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Energy Analyzer ⚡</h1>
+    <p class="lead">Answer these 10 quick questions — we'll calculate your energy score and give you personalized tips.</p>
+
+    <form id="form">
+      <div class="grid">
+        <div><label>1. Hours of sleep last night?</label><input name="sleep" type="number" min="0" max="24" value="7" required></div>
+        <div><label>2. Glasses of water today?</label><input name="water" type="number" min="0" max="20" value="4" required></div>
+        <div><label>3. Steps walked today?</label><input name="steps" type="number" min="0" max="50000" value="3000" required></div>
+        <div><label>4. Fruit/veg servings (0–5)?</label><input name="diet" type="number" min="0" max="10" value="1" required></div>
+        <div><label>5. Stress level (1–5)?</label><input name="stress" type="number" min="1" max="5" value="3" required></div>
+        <div><label>6. Screen time (hours)?</label><input name="screen" type="number" min="0" max="24" value="6" required></div>
+        <div><label>7. Exercise minutes today?</label><input name="exercise" type="number" min="0" max="600" value="0" required></div>
+        <div><label>8. Coffee/tea cups today?</label><input name="caffeine" type="number" min="0" max="20" value="2" required></div>
+        <div><label>9. Junk food servings today?</label><input name="junk" type="number" min="0" max="10" value="1" required></div>
+        <div><label>10. happy Mood level (1–5)?</label><input name="mood" type="number" min="1" max="5" value="3" required></div>
+      </div>
+
+      <small class="note">💡 Be honest for an accurate score — it only takes a minute.</small>
+
+      <div class="actions">
+        <button type="button" class="secondary" id="backBtn">Back to Dashboard</button>
+        <button type="submit" id="computeBtn">Compute Energy</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:3000';
+    document.getElementById('backBtn').addEventListener('click', ()=> location.href='dashboard.html');
+
+    document.getElementById('form').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const v = Object.fromEntries(f.entries());
+      for(const k in v) v[k] = Number(v[k]);
+
+      let score = 0;
+      if (v.sleep >=7 && v.sleep <=9) score += 12; else if (v.sleep >=5) score += 6;
+      if (v.water >=8) score += 10; else if (v.water >=4) score += 5;
+      if (v.steps >=10000) score += 12; else if (v.steps >=5000) score += 6;
+      if (v.diet >=4) score += 8; else if (v.diet >=2) score += 4;
+      if (v.stress <=2) score += 10; else if (v.stress <=3) score += 5;
+      if (v.screen <=3) score += 8; else if (v.screen <=6) score += 4;
+      if (v.exercise >=30) score += 10; else if (v.exercise >=10) score += 5;
+      if (v.caffeine <=2) score += 6; else if (v.caffeine <=4) score += 3;
+      if (v.junk === 0) score += 8; else if (v.junk <=2) score += 4;
+      if (v.mood >=4) score += 11; else if (v.mood >=3) score += 6;
+
+      const finalScore = Math.max(0, Math.min(100, Math.round(score)));
+
+      const suggestions = [];
+      if (v.water < 8) suggestions.push("💧 Keep hydrated — sip water regularly");
+      if (v.sleep < 7) suggestions.push("🛌 Try to get 7–9 hours of sleep tonight");
+      if (v.steps < 5000) suggestions.push("🚶 Take a short 10-minute walk now");
+      if (v.exercise < 30) suggestions.push("🧘 Do a quick 5-min stretch or workout");
+      if (v.junk > 1) suggestions.push("🍎 Cut down on junk — try a fruit instead");
+      if (v.caffeine > 3) suggestions.push("🍵 Limit caffeine — swap for herbal tea");
+      if (v.screen > 6) suggestions.push("👀 Give your eyes a 5-min break");
+      if (v.stress >=4) suggestions.push("🌬️ Try a 3-min breathing break");
+      if (v.mood <=2) suggestions.push("🎧 Relax with music or a short walk");
+
+      if (suggestions.length === 0) suggestions.push("🌟 Great job — keep up the healthy habits!");
+
+      let statusText = '';
+      if (finalScore >= 75) statusText = 'High Energy — Keep shining! ✨';
+      else if (finalScore >= 45) statusText = 'Moderate Energy — You can boost it with small habits.';
+      else statusText = 'Low Energy — Time to recharge and care for yourself.';
+
+      localStorage.setItem('eb_lastResult', JSON.stringify({
+        score: finalScore,
+        statusText,
+        suggestions,
+        computedAt: new Date().toISOString()
+      }));
+
+      location.href = 'energyResult.html';
+    });
+  </script>
+</body>
+</html>

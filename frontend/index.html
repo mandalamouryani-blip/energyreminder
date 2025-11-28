@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnergyBuddy - Welcome</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: #e0f7fa;
+    }
+
+    /* Parallax layers */
+    .bg-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transform: translateZ(0);
+    }
+
+    .bg-layer.layer1 {
+      background: linear-gradient(135deg, #d0e8f2, #a0d8ef);
+      z-index: -3;
+    }
+
+    .bg-layer.layer2 {
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080');
+      opacity: 0.3;
+      z-index: -2;
+    }
+
+    .bg-layer.layer3 {
+      background-image: url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080');
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #004a9f;
+      z-index: 10;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+
+    button {
+      background-color: rgba(0, 108, 168, 0.85);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: rgba(0, 82, 128, 0.85);
+    }
+
+    .collapsible {
+      background-color: rgba(255,255,255,0.9);
+      color: #004a9f;
+      cursor: pointer;
+      padding: 14px 20px;
+      width: 320px;
+      border: none;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 1rem;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .active, .collapsible:hover {
+      background-color: rgba(0, 108, 168, 0.85);
+      color: #fff;
+    }
+
+    .content {
+      padding: 0 20px;
+      display: none;
+      overflow: hidden;
+      background-color: rgba(255,255,255,0.95);
+      margin-top: 10px;
+      border-radius: 8px;
+      color: #004a9f;
+      text-align: left;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="bg-layer layer1"></div>
+  <div class="bg-layer layer2"></div>
+  <div class="bg-layer layer3"></div>
+
+  <div class="container">
+    <h1>Welcome to EnergyBuddy</h1>
+    <p>Analyze your daily energy & get reminders</p>
+    <button onclick="location.href='login.html'">Login</button>
+    <button onclick="location.href='register.html'">Register</button>
+
+    <button class="collapsible">How EnergyBuddy Works</button>
+    <div class="content">
+      <p>EnergyBuddy analyzes your daily habits like sleep, water intake, steps, diet, stress, screen time, and exercise to calculate your personalized energy score. Based on your score, it provides tailored suggestions and reminders to help you maintain optimal energy levels and well-being.</p>
+    </div>
+  </div>
+
+  <script>
+    // Collapsible toggle
+    const coll = document.getElementsByClassName("collapsible")[0];
+    coll.addEventListener("click", function() {
+      this.classList.toggle("active");
+      const content = this.nextElementSibling;
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    });
+
+    // Parallax effect
+    window.addEventListener("scroll", function() {
+      const scrollTop = window.pageYOffset;
+      document.querySelector('.layer1').style.transform = 'translateY(' + scrollTop * 0.2 + 'px)';
+      document.querySelector('.layer2').style.transform = 'translateY(' + scrollTop * 0.4 + 'px)';
+      document.querySelector('.layer3').style.transform = 'translateY(' + scrollTop * 0.6 + 'px)';
+    });
+  </script>
+
+</body>
+</html>

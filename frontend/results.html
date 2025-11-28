@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Energy Results</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Poppins, sans-serif;
+      background: linear-gradient(135deg, #6dd5fa, #ffffff);
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+    }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button.stop {
+      background-color: #e74c3c;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    p {
+      font-size: 18px;
+      color: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🌟 Your Personalized Energy Suggestions 🌟</h2>
+    <p id="energyScore"></p>
+
+    <h3>💡 Suggestions:</h3>
+    <ul style="text-align:left;">
+      <li>💧 Keep hydrated — sip water regularly.</li>
+      <li>🏃 Take a 5-minute walk every few hours.</li>
+      <li>🍎 Eat healthy snacks instead of junk food.</li>
+      <li>🧘‍♀️ Relax and take deep breaths to reduce stress.</li>
+      <li>😴 Maintain a regular sleep schedule.</li>
+    </ul>
+
+    <h3>Reminder Control</h3>
+    <button onclick="startReminders()">✅ Start Reminders</button>
+    <button class="stop" onclick="stopReminders()">🛑 Stop Reminders</button>
+  </div>
+
+  <script>
+    // Show Energy Score from previous page
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get("score");
+    document.getElementById("energyScore").innerText = "Your Energy Score: " + score + "%";
+
+    // Start reminders
+    async function startReminders() {
+      const email = localStorage.getItem("userEmail");
+      if (!email) return alert("User not logged in!");
+      await fetch("http://localhost:3000/start-reminders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      alert("✅ Reminders started!");
+    }
+
+    // Stop reminders
+    async function stopReminders() {
+      const email = localStorage.getItem("userEmail");z
+      if (!email) return alert("User not logged in!");
+      await fetch("http://localhost:3000/stop-reminders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      alert("🛑 Reminders stopped!");
+    }
+  </script>
+</body>
+</html>

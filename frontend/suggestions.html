@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnergyBuddy - Email Reminder</title>
+  <style>
+    body { font-family: Poppins, sans-serif; background: #f6f8fa; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .container { background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 350px; }
+    h2 { text-align: center; color: #333; }
+    input, textarea { width: 100%; margin: 10px 0; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+    button { width: 100%; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #45a049; }
+    .msg { text-align: center; margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Set Email Reminder</h2>
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <textarea id="message" placeholder="Enter your reminder message" required></textarea>
+    <input type="datetime-local" id="reminder_time" required />
+    <button onclick="addReminder()">Set Reminder</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <script>
+    async function addReminder() {
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+      const reminder_time = document.getElementById("reminder_time").value;
+      const msg = document.getElementById("msg");
+
+      const res = await fetch("http://localhost:3000/add-reminder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message, reminder_time })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        msg.style.color = "green";
+        msg.textContent = "✅ Reminder added successfully!";
+      } else {
+        msg.style.color = "red";
+        msg.textContent = "❌ Failed to add reminder.";
+      }
+    }
+  </script>
+</body>
+</html>
