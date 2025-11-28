@@ -1,0 +1,3 @@
+- [x] Modify backend/server.js to export the Express app instead of listening
+- [x] Create proper vercel.json configuration for full-stack deployment
+- [ ] Test the deployment setup

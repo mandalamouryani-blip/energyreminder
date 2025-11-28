@@ -129,7 +129,5 @@ app.post('/send-reminder', async (req, res) => {
   }
 });
 
-// ----------------- Start -----------------
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+// ----------------- Export for Vercel -----------------
+module.exports = app;
